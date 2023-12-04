@@ -1,4 +1,4 @@
-const mongoose = require('../../common/services/mongoose.service').mongoose;
+const mongoose = require('../mongoose/mongoose').mongoose;
 const Schema = mongoose.Schema;
 
 const rewiewSchema = new Schema({
@@ -12,8 +12,14 @@ const rewiewSchema = new Schema({
     isAccepted: Boolean
 });
 const Rewiew = mongoose.model('Rewiews', rewiewSchema);
+exports.Rewiew = Rewiew;
 
-exports.createUser = (userData) => {
-    const rewiew = new Rewiew(userData);
+rewiewSchema.set('toJSON', {
+    virtuals: true
+});
+
+exports.createRewiew = (rewiewData) => {
+    const rewiew = new Rewiew(rewiewData);
     return rewiew.save();
 };
+

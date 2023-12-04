@@ -3,6 +3,6 @@ module.exports.create = async function (req, res){
         name: req.body.name,
         number: req.body.number 
     })
-    await connection.save()
+    await connection.commit()
     res.status(200).json(connection)
 }
