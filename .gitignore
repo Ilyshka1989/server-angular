@@ -1,4 +1,10 @@
 .idea
 **/node_modules
+node_modules/
+node_modules
+/node_modules
+/node_modules/
+.node_modules
+./node_modules
 data
 yarn.lock
