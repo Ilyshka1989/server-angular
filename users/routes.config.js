@@ -7,6 +7,8 @@ const ADMIN = config.permissionLevels.ADMIN;
 const PAID = config.permissionLevels.PAID_USER;
 const FREE = config.permissionLevels.NORMAL_USER;
 
+
+
 exports.routesConfig = function (app) {
     app.post('/users', [
         UsersController.insert
@@ -33,4 +35,10 @@ exports.routesConfig = function (app) {
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),
         UsersController.removeById
     ]);
+    app.get('/review',[
+        UsersController.reviewGet
+    ]);
+    app.post('/review',[
+        UsersController.reviewPost
+    ])
 };

@@ -1,5 +1,6 @@
 const UserModel = require('../models/users.model');
 const crypto = require('crypto');
+const Review = require('../models/users.model');
 
 exports.insert = (req, res) => {
     let salt = crypto.randomBytes(16).toString('base64');
@@ -52,4 +53,22 @@ exports.removeById = (req, res) => {
         .then((result)=>{
             res.status(204).send({});
         });
+};
+
+exports.reviewGet = (req, res) => {               
+Review.findReviewById(req.params.Id)
+.then((result) => {
+    res.status(200).send(result);
+});
+};
+exports.reviewPost = (req, res) => {
+ const review = new Review({
+    id: req.body.id, 
+    name: req.body.name, 
+    email: req.body.email, 
+    rating: req.body.rating,
+    message: req.body.message,
+     dateCreated: req.body.dateCreated
+ }).save()
+ res.status(201).json(review)
 };

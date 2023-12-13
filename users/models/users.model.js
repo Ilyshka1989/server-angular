@@ -76,3 +76,35 @@ exports.removeById = (userId) => {
     });
 };
 
+const reviewSchema = new Schema({
+    id: String, 
+    name: String, 
+    email: String, 
+    rating: Number,
+    message: String,
+     dateCreated: Date,
+      isDeleted: Boolean,
+       isAccepted: Boolean
+});
+
+// Ensure virtual fields are serialised.
+reviewSchema.set('toJSON', {
+    virtuals: true
+});
+
+reviewSchema.findById = function (cb) {
+    return this.model('Reviews').find({id: this.id}, cb);
+};
+
+const Review = mongoose.model('Reviews', reviewSchema)
+
+exports.findReviewById = (id) => {
+    return Review.findById(id)
+        .then((result) => {
+           
+            return result;
+        });
+};
+
+
+
